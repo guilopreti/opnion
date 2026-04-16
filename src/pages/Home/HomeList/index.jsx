@@ -7,16 +7,44 @@ import {
   HomeListContainerTop,
   HomeListTitle,
   HomeListTitleTop,
+  LoadingState,
 } from "./styled";
 import { PostsContext } from "../../../Providers/posts/index.js";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 const HomeList = ({ inputValue }) => {
-  const { posts } = useContext(PostsContext);
+  const { posts, loading } = useContext(PostsContext);
 
   const postsDbFiltered = posts.filter((current) => {
     return current.theme.toLowerCase() === inputValue.toLowerCase();
   });
+
+  const [showMessageDelay, setShowMessageDelay] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    if (loading) {
+      timer = setTimeout(() => setShowMessageDelay(true), 3000);
+    } else {
+      setShowMessageDelay(false);
+    }
+    return () => clearTimeout(timer);
+  }, [loading]);
+
+  if (loading) {
+    return (
+      <LoadingState>
+        <div className="loader"></div>
+        <h3>Carregando os artigos...</h3>
+        {showMessageDelay && (
+          <p>
+            Pode demorar um tempinho (até 1 min) caso o servidor esteja sendo
+            religado. Por favor, aguarde só mais um pouquinho!
+          </p>
+        )}
+      </LoadingState>
+    );
+  }
 
   return (
     <>

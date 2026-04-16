@@ -4,6 +4,8 @@
 
 Bem-vindo(a) ao repositório do **Opnion!** Este é um portal colaborativo onde usuários podem publicar, descobrir e até revisar notícias e artigos sobre diversos temas, como Tecnologia e Mundo.
 
+Acesse em: https://opnion.vercel.app/
+
 ## 🚀 Funcionalidades
 
 O projeto oferece uma jornada completa para os leitores e escritores:
